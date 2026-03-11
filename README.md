@@ -7,10 +7,13 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ## Documentacion
 
 Para completar el ejercicio propuesto se ha usado:
-    - Para repasar conceptos vistos en el seminar: https://v17.angular.io/guide/understanding-angular-overview
-    - Para acabar de entender el conceptor de componentes: https://v17.angular.io/guide/component-overview
-    - Para entender el forkJoin: https://rxjs.dev/api/index/function/forkJoin
-    - Uso de IA generativa (ChatGPT): para saber cuantos componentes nuevos crear, para hacer los html de los nuevos componentes, revisión de errores que me salían
+    
+  - Para repasar conceptos vistos en el seminar: https://v17.angular.io/guide/understanding-angular-overview
+    
+  - Para acabar de entender el conceptor de componentes: https://v17.angular.io/guide/component-overview
+    
+  - Para entender el forkJoin: https://rxjs.dev/api/index/function/forkJoin
+  - Uso de IA generativa (ChatGPT): para saber cuantos componentes nuevos crear, para hacer los html de los nuevos componentes, revisión de errores que me salían
 ## Structure
 
 ```
