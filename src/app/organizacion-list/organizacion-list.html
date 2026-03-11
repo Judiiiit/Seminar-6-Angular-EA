@@ -38,6 +38,15 @@
     <div>
       <span class="muted">{{ org._id }}</span>
 
+      <!-- ENLACE AL DETALLE -->
+      <a
+        class="btn"
+        [routerLink]="['/organizaciones', org._id]"
+        [state]="{ organizacion: org }"
+      >
+        Ver detalle
+      </a>
+
       <!-- BOTÓN EDITAR -->
       <button type="button"
               class="btn"

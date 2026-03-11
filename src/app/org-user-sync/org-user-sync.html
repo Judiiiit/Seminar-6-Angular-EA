@@ -1,0 +1,42 @@
+<section class="sync-box">
+  <h3>Sincronizar usuarios</h3>
+
+  @if (errorMsg) {
+    <p>{{ errorMsg }}</p>
+  }
+
+  @if (infoMsg) {
+    <p>{{ infoMsg }}</p>
+  }
+
+  <div class="add-user">
+    <select [(ngModel)]="usuarioSeleccionadoId">
+      <option value="">Selecciona un usuario</option>
+
+      @for (user of usuariosNoAsignados; track user._id) {
+        <option [value]="user._id">
+          {{ user.name }} — {{ user.email }}
+        </option>
+      }
+    </select>
+
+    <button type="button" (click)="addUsuario()" [disabled]="loading || !usuarioSeleccionadoId">
+      Añadir usuario
+    </button>
+  </div>
+
+  <h4>Usuarios actualmente vinculados</h4>
+
+  @if (organizacion.usuarios.length) {
+    <ul>
+      @for (user of organizacion.usuarios; track user._id) {
+        <li>
+          {{ user.name }} — {{ user.email }}
+          <button type="button" (click)="quitarUsuario(user)">Eliminar</button>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p>No hay usuarios vinculados.</p>
+  }
+</section>

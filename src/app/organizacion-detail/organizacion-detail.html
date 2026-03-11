@@ -1,0 +1,32 @@
+<a routerLink="/">← Volver a organizaciones</a>
+
+@if (loading) {
+  <p>Cargando organización...</p>
+} @else if (errorMsg) {
+  <p>{{ errorMsg }}</p>
+} @else if (organizacion) {
+  <section class="detail-card">
+    <h2>{{ organizacion.name }}</h2>
+    <p><strong>ID:</strong> {{ organizacion._id }}</p>
+
+    <h3>Usuarios vinculados</h3>
+
+    @if (organizacion.usuarios.length) {
+      <ul>
+        @for (user of organizacion.usuarios; track user._id) {
+          <li>
+            <strong>{{ user.name }}</strong> — {{ user.email }}
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>Esta organización no tiene usuarios vinculados.</p>
+    }
+
+    <app-org-user-sync
+      [organizacion]="organizacion"
+      [usuariosDisponibles]="usuariosDisponibles"
+      (actualizado)="refrescar()">
+    </app-org-user-sync>
+  </section>
+}

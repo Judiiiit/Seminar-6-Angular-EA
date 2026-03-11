@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 import { environment } from '../../environments/environment';
 import { Organizacion } from '../models/organizacion.model';
@@ -15,10 +15,10 @@ export class UsuarioService {
   
   //Función: obtener usuarios de la API
   getUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(
-      `${this.baseUrl}/usuarios`
-    );
-  }
+  return this.http.get<any>(`${this.baseUrl}/usuarios`).pipe(
+    map((res: any) => Array.isArray(res) ? res : (res.usuarios ?? []))
+  );
+}
 
   //Función: obtener organizaciones de la API
   getOrganizaciones(): Observable<Organizacion[]> {

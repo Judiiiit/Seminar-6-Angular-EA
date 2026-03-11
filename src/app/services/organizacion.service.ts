@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Organizacion } from '../models/organizacion.model';
+import { Usuario } from '../models/usuario.model';
 import { environment } from '../../environments/environment';
-
-
 
 @Injectable({
   providedIn: 'root',
@@ -14,40 +13,27 @@ export class OrganizacionService {
 
   constructor(private http: HttpClient) {}
 
-  //Función: obtener organizaciones de la API
   getOrganizaciones(): Observable<Organizacion[]> {
-    return this.http.get<Organizacion[]>(
-      `${this.baseUrl}/organizaciones`
-    );
+    return this.http
+      .get<any>(`${this.baseUrl}/organizaciones`)
+      .pipe(map(res => Array.isArray(res) ? res : res.organizaciones ?? []));
   }
 
-  //Función: obtener una organización por su ID
-  getOrganizacionById(id: string): Observable<Organizacion> {
-    return this.http.get<Organizacion>(
-      `${this.baseUrl}/organizaciones/${id}`
-    );
+  getUsuariosDeOrganizacion(id: string): Observable<Usuario[]> {
+    return this.http
+      .get<any>(`${this.baseUrl}/organizaciones/${id}/usuarios`)
+      .pipe(map(res => Array.isArray(res) ? res : res.usuarios ?? []));
   }
 
-  //Función: crear nueva organización
   createOrganizacion(name: string): Observable<Organizacion> {
-    return this.http.post<Organizacion>(
-      `${this.baseUrl}/organizaciones`,
-      { name }
-    );
+    return this.http.post<Organizacion>(`${this.baseUrl}/organizaciones`, { name });
   }
 
-  //Función: actualizar organización existente
   updateOrganizacion(id: string, name: string): Observable<Organizacion> {
-    return this.http.put<Organizacion>(
-      `${this.baseUrl}/organizaciones/${id}`,
-      { name }
-    );
+    return this.http.put<Organizacion>(`${this.baseUrl}/organizaciones/${id}`, { name });
   }
 
-  //Función: eliminar organización
   deleteOrganizacion(id: string): Observable<void> {
-    return this.http.delete<void>(
-      `${this.baseUrl}/organizaciones/${id}`
-    );
+    return this.http.delete<void>(`${this.baseUrl}/organizaciones/${id}`);
   }
 }
