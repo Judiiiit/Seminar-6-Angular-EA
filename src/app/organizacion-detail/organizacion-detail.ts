@@ -27,7 +27,6 @@ export class OrganizacionDetailComponent implements OnInit {
 
   ngOnInit(): void {
   this.route.paramMap.subscribe(params => {
-
     const id = params.get('id');
 
     if (!id) {
